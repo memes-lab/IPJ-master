@@ -215,6 +215,8 @@ if input_date:
 fig2, ax2 = plt.subplots(figsize=(6, 4))
 
     # Set the x-tick positions and labels
+    
+##Geändert!!!
 x_ticks = range(len(counts))
 x_labels = ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%']
 ax2.set_xticks(x_ticks)
@@ -223,7 +225,8 @@ ax2.set_xticklabels(x_labels)
 ax2.bar(x_ticks, counts)
 ax2.set_title('Anzahl der Viertelstunden mit 10-100 % EE-Anteil')
 
-    ##
+###
+    ## ALTER CODE
     ##ax2.bar(range(len(counts)), counts)
     ##ax2.set_title('Anzahl der Viertelstunden mit 10-100 % EE-Anteil')
     ##ax2.set_xticklabels(['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'])
