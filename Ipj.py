@@ -252,3 +252,42 @@ if input_date:
     st.write(f"Startzeit: {startzeit}")
     st.write(f"Endzeit: {endzeit}")
     st.write(f"Dauer des Programms: {dauer} Sekunden")
+
+
+
+
+# Define the threshold value for low renewables production
+threshold = 1000
+
+# Create a dictionary to store the total renewable energy production for each day
+daily_production = {}
+
+# Loop through the energy data and calculate the total renewable energy production for each day
+for row in csv_reader:
+    # Parse the date and time from the row
+    date_str, time_str = row[0], row[1]
+    dt = parse_datetime(date_str, time_str)
+    date = dt.date()
+
+    # Calculate the total renewable energy production for this row
+    biomasse = float(row[3].replace('.', '').replace(',', '.'))
+    wasserkraft = float(row[4].replace('.', '').replace(',', '.'))
+    wind_offshore = float(row[5].replace('.', '').replace(',', '.'))
+    wind_onshore = float(row[6].replace('.', '').replace(',', '.'))
+    photovoltaik = float(row[7].replace('.', '').replace(',', '.'))
+    sonstige_erneuerbare = float(row[8].replace('.', '').replace(',', '.'))
+    total_renewables = biomasse + wasserkraft + wind_offshore + wind_onshore + photovoltaik + sonstige_erneuerbare
+
+    # Add the total renewable energy production to the daily_production dictionary
+    if date in daily_production:
+        daily_production[date] += total_renewables
+    else:
+        daily_production[date] = total_renewables
+
+# Loop through the daily_production dictionary and print out the dates with low renewables production
+for date, production in daily_production.items():
+    if production < threshold:
+        print(f"{date}: {production}")
+
+        ## whats the issue here?
+    st.write(f"{date}: {production}") 
